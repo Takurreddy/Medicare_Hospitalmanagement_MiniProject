@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MediCare</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+    <header class="topbar">
+        <div class="logo">$ MediCare</div>
+        <nav>
+            <a href="#" onclick="showPage('homePage'); return false;">Home</a>
+            <a href="#" id="loginBtn" class="nav-btn nav-btn-muted" onclick="showPage('loginPage'); return false;">Login</a>
+            <a href="#" id="registerBtn" class="nav-btn nav-btn-primary" onclick="showPage('registerPage'); return false;">Register</a>
+            <span id="userMenu" class="hidden user-menu">
+                <span id="userName"></span>
+                <a href="#" onclick="logout(); return false;">Logout</a>
+            </span>
+        </nav>
+    </header>
+
+    <!-- HOME -->
+    <section id="homePage" class="page active">
+        <div class="page-card hero-card">
+            <h1>Welcome to MediCare</h1>
+            <p>Book your doctor appointments easily and quickly</p>
+            <button class="primary-btn" onclick="showPage('registerPage')">Get Started</button>
+
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <h3>Easy Registration</h3>
+                    <p>Quick sign-up for patients and doctors</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Book Appointments</h3>
+                    <p>Select your preferred doctor and time</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Check Availability</h3>
+                    <p>View doctor schedules and available slots</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- REGISTER -->
+    <section id="registerPage" class="page">
+        <div class="page-card form-card">
+            <h2>Create Account</h2>
+            <form id="registerForm" class="stack-form">
+                <div class="grid-2">
+                    <input type="text" id="regFirstName" placeholder="First Name" required>
+                    <input type="text" id="regLastName" placeholder="Last Name" required>
+                </div>
+                <input type="email" id="regEmail" placeholder="Email" required>
+                <input type="text" id="regPhone" placeholder="Phone Number">
+                <input type="number" id="regAge" placeholder="Age">
+                <select id="regGender">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                <select id="regRole" required>
+                    <option value="">Select Role</option>
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                </select>
+                <input type="text" id="regSpecialty" placeholder="Specialty (for doctor only)">
+                <input type="password" id="regPassword" placeholder="Password" required>
+                <button type="submit" class="primary-btn">Register</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- LOGIN -->
+    <section id="loginPage" class="page">
+        <div class="page-card form-card">
+            <h2>Login</h2>
+            <form id="loginForm" class="stack-form">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit" class="primary-btn">Login</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- PATIENT DASHBOARD -->
+    <section id="patientDashboard" class="page">
+        <div class="page-card dashboard-card">
+            <h2>Patient Dashboard</h2>
+
+            <div class="tabs">
+                <button id="patientBookTabBtn" class="tab-btn active" onclick="switchTab('patient','book')">Book Appointment</button>
+                <button id="patientMyTabBtn" class="tab-btn" onclick="switchTab('patient','my')">My Appointments</button>
+            </div>
+
+            <div id="patientBookTab" class="tab-pane active">
+                <form class="stack-form">
+                    <label>Select Specialty</label>
+                    <select>
+                        <option>Choose...</option>
+                        <option>Cardiology</option>
+                        <option>Neurology</option>
+                        <option>Dermatology</option>
+                    </select>
+
+                    <label>Select Doctor</label>
+                    <select>
+                        <option>First select specialty</option>
+                        <option>Dr. M Harsha</option>
+                        <option>Dr. Anil Verma</option>
+                    </select>
+
+                    <label>Date</label>
+                    <input type="date">
+
+                    <label>Time</label>
+                    <select>
+                        <option>09:00 AM</option>
+                        <option>10:00 AM</option>
+                        <option>11:00 AM</option>
+                    </select>
+
+                    <label>Reason for Visit</label>
+                    <textarea rows="4" placeholder="Describe your symptoms"></textarea>
+
+                    <button type="button" class="primary-btn">Book Appointment</button>
+                </form>
+            </div>
+
+            <div id="patientMyTab" class="tab-pane">
+                <article class="appointment-card">
+                    <h4>Dr. M Harsha</h4>
+                    <p><strong>Date:</strong> 2026-03-01</p>
+                    <p><strong>Time:</strong> 09:00</p>
+                    <p><strong>Status:</strong> <span class="status-badge status-confirmed">CONFIRMED</span></p>
+                    <p><strong>Reason:</strong> Follow-up check</p>
+                </article>
+            </div>
+        </div>
+
+        <div class="page-card doctor-list-card">
+            <article class="doctor-profile-card">
+                <h4>Dr. Anil Verma</h4>
+                <span class="pill-tag">NEUROLOGY</span>
+                <p class="days-title">Available Days:</p>
+                <div class="day-pills">
+                    <span>Monday</span><span>Tuesday</span><span>Wednesday</span><span>Thursday</span><span>Friday</span>
+                </div>
+                <p><strong>Contact:</strong> 9876543212</p>
+            </article>
+
+            <article class="doctor-profile-card">
+                <h4>Dr. M Harsha</h4>
+                <span class="pill-tag">CARDIOLOGY</span>
+                <p class="days-title">Available Days:</p>
+                <div class="day-pills">
+                    <span>Monday</span><span>Tuesday</span><span>Wednesday</span><span>Thursday</span><span>Friday</span>
+                </div>
+                <p><strong>Contact:</strong> 8919464644</p>
+            </article>
+
+            <div class="book-strip">
+                <p>Want to book an appointment?</p>
+                <button class="primary-btn" onclick="switchTab('patient','book')">Book Appointment</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOCTOR DASHBOARD -->
+    <section id="doctorDashboard" class="page">
+        <div class="page-card dashboard-card">
+            <h2>Doctor Dashboard</h2>
+
+            <div class="tabs">
+                <button id="doctorManageTabBtn" class="tab-btn active" onclick="switchTab('doctor','manage')">Manage Appointments</button>
+                <button id="doctorAvailabilityTabBtn" class="tab-btn" onclick="switchTab('doctor','availability')">Set Availability</button>
+            </div>
+
+            <div id="doctorManageTab" class="tab-pane active">
+                <article class="appointment-card">
+                    <h4>M Takur</h4>
+                    <p><strong>Date:</strong> 2026-03-01</p>
+                    <p><strong>Time:</strong> 09:00</p>
+                    <p><strong>Status:</strong> <span class="status-badge status-pending">PENDING</span></p>
+                    <p><strong>Reason:</strong> Irregular heart Beating</p>
+                    <div class="action-row">
+                        <button type="button" class="approve-btn" onclick="setDemoStatus(this, 'confirmed')">Approve</button>
+                        <button type="button" class="reject-btn" onclick="setDemoStatus(this, 'rejected')">Reject</button>
+                    </div>
+                </article>
+            </div>
+
+            <div id="doctorAvailabilityTab" class="tab-pane">
+                <form class="stack-form availability-form">
+                    <label>Choose available days</label>
+                    <div class="day-check-grid">
+                        <label><input type="checkbox" checked> Monday</label>
+                        <label><input type="checkbox" checked> Tuesday</label>
+                        <label><input type="checkbox" checked> Wednesday</label>
+                        <label><input type="checkbox" checked> Thursday</label>
+                        <label><input type="checkbox" checked> Friday</label>
+                        <label><input type="checkbox"> Saturday</label>
+                        <label><input type="checkbox"> Sunday</label>
+                    </div>
+                    <button type="button" class="primary-btn">Save Availability</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
